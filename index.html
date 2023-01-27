@@ -51,9 +51,9 @@
         // let c = Math.round(yyy * 100) / 100;
         // let d = parseInt(zzz, 10);
 
-        let b = (1.38/100.00) * price; //exhange fee in NZD
+        let b = Math.round((1.38/100.00) * price); //exhange fee in NZD
         let c = price - b; //money I get in NZD
-        let d = c * inr; //money I get in INR
+        let d = Math.round(c * inr); //money I get in INR
         
 
         document.write("<h1>Your quote = $ " + price + "</h1>");
