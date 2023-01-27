@@ -31,7 +31,7 @@
       if (request.status >= 200 && request.status < 400) {
         console.log(data.rates.INR);
         //set INR value to inr variable
-        let inr = data.rates.INR - 0.5;
+        let inr = Math.round(data.rates.INR) - 0.5;
 
         // let x = tf / 100 * price + fr; // Transaction charge
         // let y = gst / 100 * x; // GST on Transaction charge
@@ -51,7 +51,7 @@
         // let c = Math.round(yyy * 100) / 100;
         // let d = parseInt(zzz, 10);
 
-        let b = Math.round((1.38/100.00) * price); //exhange fee in NZD
+        let b = Math.round((1.38/100.00)) * price; //exhange fee in NZD
         let c = price - b; //money I get in NZD
         let d = Math.round(c * inr); //money I get in INR
         
