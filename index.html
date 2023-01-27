@@ -1,0 +1,73 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Paypal Fee Conversion by Druhin</title>
+</head>
+
+<body>
+  <style>
+    body {
+      font-size: 30px;
+      font-family: sans-serif;
+    }
+  </style>
+
+  <script>
+    var price = window.prompt("Enter your quote in USD($)");
+
+    let tf = 4.4; //Transaction fees = 4.4%
+    let fr = 0.30; //Fixed rate = $0.30
+    let gst = 18; //GST = 18%
+    let cf = 4; //Conversion fees = 4%
+
+    //let inr = 74; //Indian ruppee rate = Rs.74 for $1
+
+    //get data from https://open.er-api.com and check INR value
+    let request = new XMLHttpRequest();
+    request.open('GET', 'https://open.er-api.com/v6/latest/USD', true);
+    request.onload = function () {
+      let data = JSON.parse(this.response);
+      if (request.status >= 200 && request.status < 400) {
+        console.log(data.rates.INR);
+        //set INR value to inr variable
+        let inr = data.rates.INR - 1.5;
+
+        let x = tf / 100 * price + fr; // Transaction charge
+        let y = gst / 100 * x; // GST on Transaction charge
+        let z = x + y; // Paypal Transaction Charges (inc. GST)
+
+        let xx = cf / 100 * (price - z); // Conversion fee
+        let yy = gst / 100 * xx; // GST on Conversion fee
+        let zz = xx + yy; // Paypal Conversion Fees (inc. GST)
+
+        let xxx = price - z - zz; // Money you'll get in USD (after deducting all the fees)
+        let yyy = price - z // Money you'll get in your Paypal wallet (before conversion)
+        let zzz = xxx * inr; // Money you'll get in INR (after deducting all the fees)
+
+
+        let a = Math.round(z * 100) / 100;
+        let b = Math.round(zz * 100) / 100;
+        let c = Math.round(yyy * 100) / 100;
+        let d = parseInt(zzz, 10);
+
+
+        document.write("<h1>Your quote = $ " + price + "</h1>");
+        document.write("<h1>Transaction fee = $ " + a + "</h1>");
+        document.write("<h1>Conversion fee = $ " + b + "</h1>");
+        document.write("<h1>Money you'll get (USD) = $ " + c + "</h1>");
+        document.write("<h1>Money you'll get (INR) = ₹ " + d + "</h1>");
+
+      } else {
+        console.log('error');
+        document.write("<h1>Error / Can't get the current Exchange rate</h1>");
+      }
+    }
+    request.send();
+
+
+  </script>
+
+</body>
+
+</html>
