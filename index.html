@@ -13,6 +13,8 @@
 </head>
 
 <body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/number-to-words/1.2.6/numberToWords.min.js"></script>
+
   <script>
     var price = window.prompt("Enter your quote in NZD($)");
 
@@ -51,7 +53,7 @@
         // let c = Math.round(yyy * 100) / 100;
         // let d = parseInt(zzz, 10);
 
-        let b = Math.round((1.38 / 100.00) * price); //exhange fee in NZD
+        let b = (1.38 / 100.00) * price; //exhange fee in NZD
         let c = price - b; //money I get in NZD
         let d = Math.round(c * inr); //money I get in INR
 
@@ -61,6 +63,9 @@
         document.write("<h1>Exchange fee = $ " + b + "</h1>");
         document.write("<h1>Money you'll get (NZD) = $ " + c + "</h1>");
         document.write("<h1>Money you'll get (INR) = ₹ " + d + "</h1>");
+        document.write("<h1>Money you'll get (INR) = " + numberToWords.toWords(d) + "</h1>");
+        console.log(numberToWords.toWords(d));
+
 
       } else {
         console.log('error');
