@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/number-to-words/1.2.6/numberToWords.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/indian-number-words@1.1.1/dist/indianNumberWords.min.js"></script>
 
   <script>
     var price = window.prompt("Enter your quote in NZD($)");
@@ -63,8 +63,9 @@
         document.write("<h1>Exchange fee = $ " + b + "</h1>");
         document.write("<h1>Money you'll get (NZD) = $ " + c + "</h1>");
         document.write("<h1>Money you'll get (INR) = ₹ " + d + "</h1>");
-        document.write("<h1>Money you'll get (INR) = " + numberToWords.toWords(d) + "</h1>");
-        console.log(numberToWords.toWords(d));
+        document.write("<h1>Money you'll get (INR) = " + indianNumberWords.toWords(d) + "</h1>");
+        console.log(indianNumberWords.toWords(d));
+
 
 
       } else {
